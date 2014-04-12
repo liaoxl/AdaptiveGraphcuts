@@ -153,9 +153,9 @@ Mat AdaptiveGraphcuts::GetImgSegmented()
             }
         }
         count = count==0?1:count;
-        ptMean[l].x=(float)r/count;
-        ptMean[l].y=(float)g/count;
-        ptMean[l].z=(float)b/count;
+        ptMean[l-1].x=(float)r/count;
+        ptMean[l-1].y=(float)g/count;
+        ptMean[l-1].z=(float)b/count;
     }
 
     for(int i=0; i<src_height; i++)
