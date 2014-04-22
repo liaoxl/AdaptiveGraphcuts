@@ -143,7 +143,7 @@ Mat AdaptiveGraphcuts::GetImgSegmented()
         {
             for(int j=0; j<src_width; j++)
             {
-                if(mlg->what_segment(i*src_width+j)==l)
+                if(mlg->what_segment(i*src_width+j)==l+1)
                 {
                     r += src_img.at<Vec3b>(i,j)[0];
                     g += src_img.at<Vec3b>(i,j)[1];
@@ -153,16 +153,16 @@ Mat AdaptiveGraphcuts::GetImgSegmented()
             }
         }
         count = count==0?1:count;
-        ptMean[l-1].x=(float)r/count;
-        ptMean[l-1].y=(float)g/count;
-        ptMean[l-1].z=(float)b/count;
+        ptMean[l].x=(float)r/count;
+        ptMean[l].y=(float)g/count;
+        ptMean[l].z=(float)b/count;
     }
 
     for(int i=0; i<src_height; i++)
     {
         for(int j=0; j<src_width; j++)
         {
-            int l=mlg->what_segment(i*src_width+j);
+            int l=mlg->what_segment(i*src_width+j)-1;
             dst_img.at<Vec3b>(i,j)[0]=(int)ptMean[l].x;
             dst_img.at<Vec3b>(i,j)[1]=(int)ptMean[l].y;
             dst_img.at<Vec3b>(i,j)[2]=(int)ptMean[l].z;
